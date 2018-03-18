@@ -23,7 +23,7 @@ class Supermarket:
                 
                 elif offer[0] == "buy_any":
                     count, price = offer[1:3]
-                    items = offer[3:]
+                    items = offer[3:] # items in descending price order
                     self.buy_any.append((int(count), int(price), items))
                     
            
@@ -54,13 +54,8 @@ class Supermarket:
             
             any_of_group = []
             for item in items_on_offer:
-                # Get number of how many have to be matched with other items on offer
-                # the rest can be matched with the same kind
-                number_to_match = bought.get(item, 0) % count
-                if number_to_match > 0:
-                    bought[item] -= number_to_match
-                    any_of_group += number_to_match * [item]
-                
+                any_of_group += bought.get(item, 0) * [item]
+                                
             total += len(any_of_group) / count * price
             reminder = len(any_of_group) % count
             if reminder:
