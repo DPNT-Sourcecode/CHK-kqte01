@@ -40,7 +40,7 @@ class TestCheckout(unittest.TestCase):
     
     def setUp(self):
         print "#" * 80
-        print os.path.basename(sys.modules[__name__].__file__)
+        print os.path.abspath(sys.modules[__name__].__file__)
         
         self.shop = Supermarket("./offers.txt")
         
