@@ -6,7 +6,7 @@ class Supermarket:
 
     def __init__(self, offers_file):
         self.prices = defaultdict(list)
-        self.give_away = {}
+        self.giveAway = {}
         self.buy_any = []
         
         with open(offers_file) as file_in:
@@ -19,7 +19,7 @@ class Supermarket:
 
                 elif offer[0] == "give_away":
                     free, required_count, item = offer[1:]
-                    self.give_away[free] = (int(required_count), item)
+                    self.giveAway[free] = (int(required_count), item)
                 
                 elif offer[0] == "buy_any":
                     count, price = offer[1:3]
@@ -29,15 +29,15 @@ class Supermarket:
            
             
     def remove_give_aways(self, bought):
-        for give_away, requirement in self.give_away.iteritems():
+        for free, requirement in self.giveAway.iteritems():
             required_count, item = requirement
-            if give_away in bought:
+            if free in bought:
                 item_count = bought.get(item, 0)
                 free_count = item_count / required_count
-                if bought[give_away] < free_count:
-                    bought[give_away] = 0
+                if bought[free] < free_count:
+                    bought[free] = 0
                 else:
-                    bought[give_away] -= free_count
+                    bought[free] -= free_count
 
     
     def checkout(self, basket):
