@@ -21,15 +21,18 @@ class Supermarket:
                 }
         
         self.offers = {
-                "A" : {3 : 130,},
-                "B" : {2 : 45}
+                "A" : (3, 130),
+                "B" : (2, 45)
                 }
 
     
     def make_offer(self, item, count):
-        self.offers.get(item, self.prices[item])
+        offer_count, offer_price = self.offers.get(item, (1, self.prices[item]))
         
+        return ((count / offer_count * offer_price) 
+               + (count % offer_count * self.prices[item]))
         
+            
     
     def checkout(self, basket):
         grouped = defaultdict(int)
@@ -38,10 +41,9 @@ class Supermarket:
     
         price = 0
         for item, count in grouped.iteritems():                
-#            if item in self.offers and count >= self.offers[item]:                
-#                price += make_offer(item, count)
-#            el
-            if item in self.prices:
+            if item in self.offers:
+                price += self.make_offer(item, count)
+            elif item in self.prices:
                 price += count * self.prices[item]
             else:
                 return -1
