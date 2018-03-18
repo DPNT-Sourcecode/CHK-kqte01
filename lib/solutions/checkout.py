@@ -26,14 +26,9 @@ class Supermarket:
                     items = offer[3:]
                     self.buy_any.append((count, price, items))
                     
-                    
-    
-    def checkout(self, basket):
-        bought = defaultdict(int)
-        for item in basket:
-            bought[item] += 1
-    
-        # deduct give aways        
+           
+            
+    def remove_give_aways(self, bought):
         for give_away, requirement in self.give_away.iteritems():
             required_count, item = requirement
             if give_away in bought:
@@ -43,9 +38,27 @@ class Supermarket:
                     bought[give_away] = 0
                 else:
                     bought[give_away] -= free_count
-        
+
     
+    def checkout(self, basket):
+        bought = defaultdict(int)
+        for item in basket:
+            bought[item] += 1
+    
+        self.remove_give_aways(bought)
+        
         total = 0
+        # buy # any of
+        for count, price, items_on_offer in self.buy_any:
+            for item in items_on_offer:
+                # Get number of how many have to be matched with other items on offer                
+                number_to_match = bought.get(item, 0) % count
+                if number_to_match > 0:
+                    bought[item] -= number_to_match
+
+            
+    
+        # prices and group buy
         for item, count in bought.iteritems():                
             if item not in self.prices:                
                 return -1
