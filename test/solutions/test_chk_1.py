@@ -35,7 +35,9 @@ class TestCheckout(unittest.TestCase):
         
         self.assertEqual(checkout("EEB"), 80)
         self.assertEqual(checkout("EEBEE"), 160)
-
+        self.assertEqual(checkout("EEBEEBB"), 190)
+        self.assertEqual(checkout("EEBEEBBB"), 205)
+        self.assertEqual(checkout("EEBEEBBBB"), 235)
 
 if __name__ == '__main__':
     unittest.main()
