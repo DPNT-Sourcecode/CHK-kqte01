@@ -54,7 +54,7 @@ class Supermarket:
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
-    basket = skus.split()
+    basket = list(skus)
     shop = Supermarket()
     return shop.checkout(basket)
     

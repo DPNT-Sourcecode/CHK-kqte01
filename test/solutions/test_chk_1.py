@@ -16,11 +16,11 @@ class TestCheckout(unittest.TestCase):
     #+------+-------+----------------+
     
     def test_checkout(self):
-        self.assertEqual(checkout("A B C D"), 115)
-        self.assertEqual(checkout("A B"), 80)
-        self.assertEqual(checkout("A F D"), -1)
+        self.assertEqual(checkout("ABCD"), 115)
+        self.assertEqual(checkout("AB"), 80)
+        self.assertEqual(checkout("AFD"), -1)
         
-        self.assertEqual(checkout("A B C A C A A D"), 265)
+        self.assertEqual(checkout("ABCACAAD"), 265)
 
 
 if __name__ == '__main__':
