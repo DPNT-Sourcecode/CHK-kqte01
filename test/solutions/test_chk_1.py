@@ -36,8 +36,11 @@ class TestCheckout(unittest.TestCase):
     #| F    | 10    | 2F get one F free      |
     #+------+-------+------------------------+
     
-    def SetUp(self):
-        self.shop = Supermarket("offers.txt")
+    def setUp(self):
+        import os
+        print os.curdir
+        
+        self.shop = Supermarket("./offers.txt")
         
     
     def test_checkout(self):
