@@ -46,7 +46,7 @@ class TestCheckout(unittest.TestCase):
     def test_checkout(self):
         self.assertEqual(self.shop.checkout(list("ABCD")), 115)
         self.assertEqual(self.shop.checkout(list("AB")), 80)
-        self.assertEqual(self.shop.checkout(list("AXD")), -1)
+        self.assertEqual(self.shop.checkout(list("A8D")), -1)
         
         self.assertEqual(self.shop.checkout(list("ABCACAAD")), 265)
         
