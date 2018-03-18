@@ -54,7 +54,7 @@ class Supermarket:
             
             any_of_group = []
             for item in items_on_offer:
-                any_of_group += bought.get(item, 0) * [item]
+                any_of_group += bought.pop(item, 0) * [item]
                                 
             total += len(any_of_group) / count * price
             reminder = len(any_of_group) % count
