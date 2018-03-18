@@ -22,11 +22,12 @@ class Supermarket:
     #| E    | 40    | 2E get one B free      |
     #+------+-------+------------------------+
 
-    Price = namedtuple("Price", ["count", "price", "free"])
+    Price = namedtuple("Price", ["count", "price", "give_away"])
 
     def __init__(self):
         
         self.prices = {
+                # Last price is always for a single item with no offers
                 "A" : [ 
                         Supermarket.Price(5, 200, set()),
                         Supermarket.Price(3, 130, set()),
@@ -73,9 +74,13 @@ class Supermarket:
             for offer in self.prices[item]:
                 price = count / offer.count * offer.price
                 count %= offer.count
-            
                 total += price
-            
+                
+                if price > 0 and offer.give_away:
+                    for free in offer.give_away:
+                        if free in grouped:                            
+                            total -= self.prices[free][-1] 
+                                
         return total
 
 
