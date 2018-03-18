@@ -4,7 +4,7 @@ from tdl.runner.challenge_session import ChallengeSession
 from solutions.sum import sum
 from solutions.hello import hello
 from solutions.fizz_buzz import fizz_buzz
-from solutions.checkout import checkout
+from solutions.checkout import Supermarket
 from runner.utils import Utils
 from runner.user_input_action import get_user_input
 
@@ -49,6 +49,12 @@ from runner.user_input_action import get_user_input
          * Anything really, provided that this file stays runnable.
  
 """
+
+shop = Supermarket("offers.txt")
+def checkout(skus):
+    basket = list(skus)
+    return shop.checkout(basket)
+
 
 runner = QueueBasedImplementationRunnerBuilder()\
     .set_config(Utils.get_runner_config())\
