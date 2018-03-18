@@ -55,5 +55,14 @@ class TestCheckout(unittest.TestCase):
         self.assertEqual(checkout("ABCAFCFAADFFF"), 305)
         self.assertEqual(checkout("ABFCAFCFAADFFF"), 305)
 
+        self.assertEqual(checkout("F"), 10)
+        self.assertEqual(checkout("FF"), 20)
+        self.assertEqual(checkout("FFF"), 20)
+        self.assertEqual(checkout("FFFF"), 30)
+        self.assertEqual(checkout("FFFFF"), 40)
+        self.assertEqual(checkout("FFFFFF"), 40)
+        self.assertEqual(checkout("FFFFFFF"), 50)
+
+
 if __name__ == '__main__':
     unittest.main()
