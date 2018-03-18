@@ -25,11 +25,21 @@ class TestCheckout(unittest.TestCase):
     #| E    | 40    | 2E get one B free      |
     #+------+-------+------------------------+
     
+    #+------+-------+------------------------+
+    #| Item | Price | Special offers         |
+    #+------+-------+------------------------+
+    #| A    | 50    | 3A for 130, 5A for 200 |
+    #| B    | 30    | 2B for 45              |
+    #| C    | 20    |                        |
+    #| D    | 15    |                        |
+    #| E    | 40    | 2E get one B free      |
+    #| F    | 10    | 2F get one F free      |
+    #+------+-------+------------------------+
     
     def test_checkout(self):
         self.assertEqual(checkout("ABCD"), 115)
         self.assertEqual(checkout("AB"), 80)
-        self.assertEqual(checkout("AFD"), -1)
+        self.assertEqual(checkout("AXD"), -1)
         
         self.assertEqual(checkout("ABCACAAD"), 265)
         
@@ -39,6 +49,11 @@ class TestCheckout(unittest.TestCase):
         self.assertEqual(checkout("EEBEEBB"), 190)
         self.assertEqual(checkout("EEBEEBBB"), 205)
         self.assertEqual(checkout("EEBEEBBBB"), 235)
+        
+        
+        self.assertEqual(checkout("ABCACAADFF"), 285)
+        self.assertEqual(checkout("ABCAFCFAADFFF"), 305)
+        self.assertEqual(checkout("ABFCAFCFAADFFF"), 305)
 
 if __name__ == '__main__':
     unittest.main()
