@@ -38,7 +38,8 @@ class TestCheckout(unittest.TestCase):
     
     def setUp(self):
         import os
-        print os.curdir
+        print "#" * 80
+        print os.path.abspath(os.path.curdir)
         
         self.shop = Supermarket("./offers.txt")
         
