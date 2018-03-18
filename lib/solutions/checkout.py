@@ -78,8 +78,9 @@ class Supermarket:
                 
                 if price > 0 and offer.give_away:
                     for free in offer.give_away:
-                        if free in grouped:                            
-                            total -= self.prices[free][-1] 
+                        if free in grouped:
+                            deduction = self.prices[free][-1] 
+                            total -= deduction.price
                                 
         return total
 
