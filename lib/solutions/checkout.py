@@ -1,4 +1,4 @@
-from collections import defaultdict
+from collections import defaultdict, namedtuple
 
 class Supermarket:
     
@@ -12,25 +12,50 @@ class Supermarket:
     #| D    | 15    |                |
     #+------+-------+----------------+
 
+    #+------+-------+------------------------+
+    #| Item | Price | Special offers         |
+    #+------+-------+------------------------+
+    #| A    | 50    | 3A for 130, 5A for 200 |
+    #| B    | 30    | 2B for 45              |
+    #| C    | 20    |                        |
+    #| D    | 15    |                        |
+    #| E    | 40    | 2E get one B free      |
+    #+------+-------+------------------------+
+
+    Price = namedtuple("Price", ["count", "price", "free"])
+
     def __init__(self):
+        
         self.prices = {
-                "A" : 50,
-                "B" : 30,
-                "C" : 20,
-                "D" : 15            
+                "A" : [ 
+                        Supermarket.Price(5, 200, set()),
+                        Supermarket.Price(3, 130, set()),
+                        Supermarket.Price(1, 50, set())
+                      ],
+                "B" : [ 
+                        Supermarket.Price(2, 45, set()),
+                        Supermarket.Price(1, 30, set())     
+                      ],
+                "C" : [
+                        Supermarket.Price(1, 20, set())
+                      ],
+                "D" : [
+                        Supermarket.Price(1, 15, set())
+                      ],
+                "E" : [
+                        Supermarket.Price(2, 80, set("B")),
+                        Supermarket.Price(1, 40, set())
+                      ],
                 }
         
-        self.offers = {
-                "A" : (3, 130),
-                "B" : (2, 45)
-                }
+        
 
     
-    def make_offer(self, item, count):
-        offer_count, offer_price = self.offers.get(item, (1, self.prices[item]))
-        
-        return ((count / offer_count * offer_price) 
-               + (count % offer_count * self.prices[item]))
+#    def make_offer(self, item, count):
+#        offer_count, offer_price = self.offers.get(item, (1, self.prices[item]))
+#        
+#        return ((count / offer_count * offer_price) 
+#               + (count % offer_count * self.prices[item]))
         
             
     
@@ -39,16 +64,19 @@ class Supermarket:
         for item in basket:
             grouped[item] += 1
     
-        price = 0
+        total = 0
+        
         for item, count in grouped.iteritems():                
-            if item in self.offers:
-                price += self.make_offer(item, count)
-            elif item in self.prices:
-                price += count * self.prices[item]
-            else:
+            if item not in self.prices:                
                 return -1
-
-        return price
+            
+            for offer in self.prices[item]:
+                price = count / offer.count * offer.price
+                count %= offer.count
+            
+                total += price
+            
+        return total
 
 
 # noinspection PyUnusedLocal
