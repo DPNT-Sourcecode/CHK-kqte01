@@ -44,4 +44,4 @@ price Y 3 45
 price Y 1 20
 price Z 3 45
 price Z 1 21
-buy_any 3 45 S T X Y Z
+buy_any 3 45 Z S T Y X
