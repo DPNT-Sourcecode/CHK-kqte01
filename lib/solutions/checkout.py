@@ -48,14 +48,25 @@ class Supermarket:
         self.remove_give_aways(bought)
         
         total = 0
-        # buy # any of
+        
+        # buy # any of        
         for count, price, items_on_offer in self.buy_any:
+            
+            aby_of_group = []
             for item in items_on_offer:
-                # Get number of how many have to be matched with other items on offer                
+                # Get number of how many have to be matched with other items on offer
+                # the rest can be matched with the same kind
                 number_to_match = bought.get(item, 0) % count
                 if number_to_match > 0:
                     bought[item] -= number_to_match
-
+                    any_of_group += number_to_match * [item]
+                
+            total += len(any_of_group) / count * price
+            reminder = len(any_of_group) % count
+            if reminder:
+                not_matched = any_of_group[-reminder:]
+                
+            
             
     
         # prices and group buy
