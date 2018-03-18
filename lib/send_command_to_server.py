@@ -1,4 +1,5 @@
 import sys
+import os
 from tdl.queue.queue_based_implementation_runner import QueueBasedImplementationRunnerBuilder
 from tdl.runner.challenge_session import ChallengeSession
 from solutions.sum import sum
@@ -50,7 +51,9 @@ from runner.user_input_action import get_user_input
  
 """
 
-shop = Supermarket("offers.txt")
+directory = os.path.dirname(sys.modules[__name__].__file__)
+shop = Supermarket(os.path.join(directory,"offers.txt"))
+
 def checkout(skus):
     basket = list(skus)
     return shop.checkout(basket)

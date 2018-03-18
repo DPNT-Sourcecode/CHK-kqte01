@@ -39,10 +39,8 @@ class TestCheckout(unittest.TestCase):
     #+------+-------+------------------------+
     
     def setUp(self):
-        print "#" * 80
-        print os.path.abspath(sys.modules[__name__].__file__)
-        
-        self.shop = Supermarket("./offers.txt")
+        directory = os.path.dirname(sys.modules[__name__].__file__)
+        self.shop = Supermarket(os.path.join(directory, "offers.txt"))
         
     
     def test_checkout(self):
