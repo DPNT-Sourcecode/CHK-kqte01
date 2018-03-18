@@ -28,9 +28,7 @@ price Q 3 80
 price Q 1 30
 price R 1 50
 give_away Q 3 R
-price S 3 45
 price S 1 20
-price T 3 45
 price T 1 20
 price U 1 40
 give_away U 4 U
@@ -38,10 +36,7 @@ price V 3 130
 price V 2 90
 price V 1 50
 price W 1 20
-price X 3 45
 price X 1 17
-price Y 3 45
 price Y 1 20
-price Z 3 45
 price Z 1 21
 buy_any 3 45 Z S T Y X
