@@ -121,12 +121,6 @@ class Supermarket:
                     
         return total
 
-shop = Supermarket("offers.txt")
 
-# noinspection PyUnusedLocal
-# skus = unicode string
-def checkout(skus):
-    basket = list(skus)
-    return shop.checkout(basket)
     
     

@@ -1,6 +1,6 @@
 import unittest
 
-from lib.solutions.checkout import checkout
+from lib.solutions.checkout import Supermarket
 
 
 class TestCheckout(unittest.TestCase):
@@ -36,32 +36,36 @@ class TestCheckout(unittest.TestCase):
     #| F    | 10    | 2F get one F free      |
     #+------+-------+------------------------+
     
+    def SetUp(self):
+        self.shop = Supermarket("offers.txt")
+        
+    
     def test_checkout(self):
-        self.assertEqual(checkout("ABCD"), 115)
-        self.assertEqual(checkout("AB"), 80)
-        self.assertEqual(checkout("AXD"), -1)
+        self.assertEqual(self.shop.checkout(list("ABCD")), 115)
+        self.assertEqual(self.shop.checkout(list("AB")), 80)
+        self.assertEqual(self.shop.checkout(list("AXD")), -1)
         
-        self.assertEqual(checkout("ABCACAAD"), 265)
+        self.assertEqual(self.shop.checkout(list("ABCACAAD")), 265)
         
-        self.assertEqual(checkout("EEB"), 80)
-        self.assertEqual(checkout("EEBEE"), 160)
-        self.assertEqual(checkout("EEBEEB"), 160)
-        self.assertEqual(checkout("EEBEEBB"), 190)
-        self.assertEqual(checkout("EEBEEBBB"), 205)
-        self.assertEqual(checkout("EEBEEBBBB"), 235)
+        self.assertEqual(self.shop.checkout(list("EEB")), 80)
+        self.assertEqual(self.shop.checkout(list("EEBEE")), 160)
+        self.assertEqual(self.shop.checkout(list("EEBEEB")), 160)
+        self.assertEqual(self.shop.checkout(list("EEBEEBB")), 190)
+        self.assertEqual(self.shop.checkout(list("EEBEEBBB")), 205)
+        self.assertEqual(self.shop.checkout(list("EEBEEBBBB")), 235)
         
         
-        self.assertEqual(checkout("ABCACAADFF"), 285)
-        self.assertEqual(checkout("ABCAFCFAADFFF"), 305)
-        self.assertEqual(checkout("ABFCAFCFAADFFF"), 305)
+        self.assertEqual(self.shop.checkout(list("ABCACAADFF")), 285)
+        self.assertEqual(self.shop.checkout(list("ABCAFCFAADFFF")), 305)
+        self.assertEqual(self.shop.checkout(list("ABFCAFCFAADFFF")), 305)
 
-        self.assertEqual(checkout("F"), 10)
-        self.assertEqual(checkout("FF"), 20)
-        self.assertEqual(checkout("FFF"), 20)
-        self.assertEqual(checkout("FFFF"), 30)
-        self.assertEqual(checkout("FFFFF"), 40)
-        self.assertEqual(checkout("FFFFFF"), 40)
-        self.assertEqual(checkout("FFFFFFF"), 50)
+        self.assertEqual(self.shop.checkout(list("F")), 10)
+        self.assertEqual(self.shop.checkout(list("FF")), 20)
+        self.assertEqual(self.shop.checkout(list("FFF")), 20)
+        self.assertEqual(self.shop.checkout(list("FFFF")), 30)
+        self.assertEqual(self.shop.checkout(list("FFFFF")), 40)
+        self.assertEqual(self.shop.checkout(list("FFFFFF")), 40)
+        self.assertEqual(self.shop.checkout(list("FFFFFFF")), 50)
 
 
 if __name__ == '__main__':
