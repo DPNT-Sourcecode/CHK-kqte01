@@ -1,4 +1,6 @@
 import unittest
+import sys
+import os
 
 from lib.solutions.checkout import Supermarket
 
@@ -37,9 +39,8 @@ class TestCheckout(unittest.TestCase):
     #+------+-------+------------------------+
     
     def setUp(self):
-        import os
         print "#" * 80
-        print os.path.abspath(os.path.curdir)
+        print os.path.basename(sys.modules[__name__].__file__)
         
         self.shop = Supermarket("./offers.txt")
         
