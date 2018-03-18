@@ -21,6 +21,17 @@ class Supermarket:
     #| D    | 15    |                        |
     #| E    | 40    | 2E get one B free      |
     #+------+-------+------------------------+
+    #    
+    #+------+-------+------------------------+
+    #| Item | Price | Special offers         |
+    #+------+-------+------------------------+
+    #| A    | 50    | 3A for 130, 5A for 200 |
+    #| B    | 30    | 2B for 45              |
+    #| C    | 20    |                        |
+    #| D    | 15    |                        |
+    #| E    | 40    | 2E get one B free      |
+    #| F    | 10    | 2F get one F free      |
+    #+------+-------+------------------------+
 
     Price = namedtuple("Price", ["count", "price"])
 
@@ -46,10 +57,14 @@ class Supermarket:
                 "E" : [
                         Supermarket.Price(1, 40)
                       ],
+                "F" : [
+                        Supermarket.Price(1, 10)
+                      ],
                 }
         
         self.give_away = {
-                "B" : (2, "E")
+                "B" : (2, "E"),
+                "F" : (3, "F")
                 }
             
     
