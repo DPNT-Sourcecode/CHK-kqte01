@@ -48,16 +48,7 @@ class Supermarket:
                         Supermarket.Price(1, 40, set())
                       ],
                 }
-        
-        
-
-    
-#    def make_offer(self, item, count):
-#        offer_count, offer_price = self.offers.get(item, (1, self.prices[item]))
-#        
-#        return ((count / offer_count * offer_price) 
-#               + (count % offer_count * self.prices[item]))
-        
+               
             
     
     def checkout(self, basket):
@@ -72,16 +63,13 @@ class Supermarket:
                 return -1
             
             for offer in self.prices[item]:
-                price = count / offer.count * offer.price
-                count %= offer.count
+                offers_num = count / offer.count
+                price = offers_num * offer.price
                 total += price
                 
-                if price > 0 and offer.give_away:
-                    for free in offer.give_away:
-                        if free in grouped:
-                            deduction = self.prices[free][-1] 
-                            total -= deduction.price
-                                
+                # reduce count by what was added to total already
+                count %= offer.count
+                    
         return total
 
 
